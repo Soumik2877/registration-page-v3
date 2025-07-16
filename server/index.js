@@ -5,13 +5,34 @@ const axios = require('axios');
 const app = express();
 const PORT = 5500;
 
-// ✅ Allow requests from frontend
-const corsOptions ={
-    origin:['http://localhost:3001','https://registration-page-v3.vercel.app/'], 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+// // ✅ Allow requests from frontend
+// const corsOptions ={
+//     origin:['http://localhost:3001','https://registration-page-v3.vercel.app/'], 
+//     credentials:true,            //access-control-allow-credentials:true
+//     optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
+
+// ✅ Step 1: Allow multiple origins
+const allowedOrigins = [
+    'http://localhost:3001',
+    'https://registration-page-v3.vercel.app'
+  ];
+  
+  // ✅ Step 2: Configure CORS middleware
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS not allowed from this origin: ' + origin));
+      }
+    },
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true
+  }));
+
 app.use(express.json());
 
 // 🔄 Replace with your actual Google Script URL
