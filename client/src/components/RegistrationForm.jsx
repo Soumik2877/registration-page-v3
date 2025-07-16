@@ -30,7 +30,7 @@ function RegistrationForm() {
     };
 
     try {
-      const res = await axios.post('https://registration-page-v3.onrender.com/register', data);
+      const res = await axios.post('https://registration-page-v3-1.onrender.com/register', data);
       setMessage(res.data || 'Submitted successfully');
     }catch (err) {
         setMessage('Submission failed');
