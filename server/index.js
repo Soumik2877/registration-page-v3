@@ -7,7 +7,7 @@ const PORT = 5500;
 
 // ✅ Allow requests from frontend
 const corsOptions ={
-    origin:'http://localhost:3001','https://registration-page-v3.vercel.app/', 
+    origin:['http://localhost:3001','https://registration-page-v3.vercel.app/'], 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
